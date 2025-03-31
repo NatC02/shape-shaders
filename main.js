@@ -40,3 +40,18 @@ window.addEventListener("resize", (event) => {
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.enablePan = false;
+
+const light = new THREE.DirectionalLight('white', 3);
+light.position.set(1, 1, 1);
+scene.add(light);
+
+// Create shader materials
+const shaderMaterials = {
+    front: createShaderMaterial(everflowShader),
+    back: createShaderMaterial(pulseShader),
+    right: createShaderMaterial(randomShader),
+    left: createShaderMaterial(fallenRoseShader),
+    bottom: createShaderMaterial(mazeShader),
+    top: createShaderMaterial(rainShader)
+};
+
