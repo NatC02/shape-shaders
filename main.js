@@ -138,3 +138,40 @@ wall6.name = 'top';
 const walls = [wall1, wall2, wall3, wall4, wall5, wall6];
 
 scene.add(...walls);
+
+const v = new THREE.Vector3();
+const u = new THREE.Vector3();
+
+const shapeTransformations = {
+    'front': () => {
+        // Hexagonal prism with everflowShader
+        cube.geometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 6);
+        cube.material = shaderMaterials.front;
+    },
+    'back': () => {
+        // Sphere with pulseShader
+        cube.geometry = new THREE.SphereGeometry(0.5, 16, 16);
+        cube.material = shaderMaterials.back;
+    },
+    'right': () => {
+        // Cone with randomShader
+        cube.geometry = new THREE.ConeGeometry(0.5, 1, 6);
+        cube.material = shaderMaterials.right;
+    },
+    'left': () => {
+        // Tetrahedron with fallenRoseShader
+        cube.geometry = new THREE.TetrahedronGeometry(0.5);
+        cube.material = shaderMaterials.left;
+    },
+    'top': () => {
+        // Torus with secondEverflowShader
+        cube.geometry = new THREE.TorusGeometry(0.3, 0.2, 16, 100);
+        cube.material = shaderMaterials.top;
+    },
+    'bottom': () => {
+        // Octahedron with mazeShader
+        cube.geometry = new THREE.OctahedronGeometry(0.5);
+        cube.material = shaderMaterials.bottom;
+    }
+};
+
