@@ -105,3 +105,36 @@ const baseMaterial = new THREE.MeshLambertMaterial({
     emissive: wallShadeColor,
     emissiveIntensity: 0.2
 });
+
+const wall1 = new THREE.Mesh(geometry, baseMaterial.clone());
+wall1.position.z = 1;
+wall1.name = 'front';
+
+const wall2 = new THREE.Mesh(geometry, baseMaterial.clone());
+wall2.rotation.y = Math.PI;		
+wall2.position.z = -1;
+wall2.name = 'back';
+
+const wall3 = new THREE.Mesh(geometry, baseMaterial.clone());
+wall3.rotation.y = Math.PI/2;		
+wall3.position.x = 1;
+wall3.name = 'right';
+
+const wall4 = new THREE.Mesh(geometry, baseMaterial.clone());
+wall4.rotation.y = -Math.PI/2;		
+wall4.position.x = -1;
+wall4.name = 'left';
+
+const wall5 = new THREE.Mesh(geometry, baseMaterial.clone());
+wall5.rotation.x = Math.PI/2;		
+wall5.position.y = -1;
+wall5.name = 'bottom';
+
+const wall6 = new THREE.Mesh(geometry, baseMaterial.clone());
+wall6.rotation.x = -Math.PI/2;		
+wall6.position.y = 1;
+wall6.name = 'top';
+
+const walls = [wall1, wall2, wall3, wall4, wall5, wall6];
+
+scene.add(...walls);
