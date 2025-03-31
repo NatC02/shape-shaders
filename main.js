@@ -175,3 +175,44 @@ const shapeTransformations = {
     }
 };
 
+let currentWallFacing = null;
+
+function animationLoop(t) {
+    // Update shader uniforms
+    for (const key in shaderMaterials) {
+        if (shaderMaterials[key].uniforms.iTime) {
+            shaderMaterials[key].uniforms.iTime.value = t * 0.001; // Convert to seconds
+        }
+    }
+
+    // Rotate cube
+    cube.rotation.set(t/600, t/700, t/800);
+    controls.update();
+
+    // Determine which wall the camera is facing
+    for (const wall of walls) {
+        wall.getWorldDirection(v);
+        camera.getWorldDirection(u);
+    
+        // Adjust wall opacity
+        wall.material.opacity = 2 * v.dot(u);
+
+        // Check if this wall is prominently facing the camera
+        if (v.dot(u) > 0.9) {
+            // If we've changed walls, update the cube's shape and material
+            if (wall.name !== currentWallFacing) {
+                currentWallFacing = wall.name;
+                
+                // Apply the specific shape transformation and shader
+                if (shapeTransformations[wall.name]) {
+                    shapeTransformations[wall.name]();
+                }
+            }
+            break;
+        }
+    }
+    
+    // Update light position
+    light.position.copy(camera.position);
+    renderer.render(scene, camera);
+}
