@@ -78,3 +78,30 @@ function createShaderMaterial(shader) {
         fragmentShader: shader.fragmentShader
     });
 }
+
+const baseCubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+
+const cube = new THREE.Mesh(
+    baseCubeGeometry, 
+    new THREE.MeshStandardMaterial({
+        color: new THREE.Color('#FFC914'),
+        metalness: 0.47,
+        roughness: 0.53,
+        flatShading: true
+    })
+);
+cube.scale.setScalar(0.75);
+scene.add(cube);
+
+// Wall geometries
+const geometry = new THREE.BoxGeometry(1.8, 1.8, 0.1);
+
+// Configurable wall material
+const wallColor = '#E0F2E9';
+const wallShadeColor = '#FFC914';
+const baseMaterial = new THREE.MeshLambertMaterial({ 
+    color: wallColor, 
+    transparent: true,
+    emissive: wallShadeColor,
+    emissiveIntensity: 0.2
+});
