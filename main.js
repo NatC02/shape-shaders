@@ -216,3 +216,5 @@ function animationLoop(t) {
     light.position.copy(camera.position);
     renderer.render(scene, camera);
 }
+
+renderer.setAnimationLoop(animationLoop);
