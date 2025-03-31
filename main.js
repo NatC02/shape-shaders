@@ -55,3 +55,26 @@ const shaderMaterials = {
     top: createShaderMaterial(rainShader)
 };
 
+function updateShaderUniforms() {
+    const resolution = new THREE.Vector3(
+        window.innerWidth, window.innerHeight, 1.0
+    );
+    
+    for (const key in shaderMaterials) {
+        if (shaderMaterials[key].uniforms.iResolution) {
+            shaderMaterials[key].uniforms.iResolution.value = resolution;
+        }
+    }
+}
+
+// Call once to initialize
+updateShaderUniforms();
+
+// Function to create shader material from shader definition
+function createShaderMaterial(shader) {
+    return new THREE.ShaderMaterial({
+        uniforms: shader.uniforms,
+        vertexShader: shader.vertexShader,
+        fragmentShader: shader.fragmentShader
+    });
+}
