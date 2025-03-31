@@ -27,3 +27,16 @@ window.addEventListener("resize", (event) => {
     // Update shader uniforms with new resolution
     updateShaderUniforms();
 });
+
+window.addEventListener("resize", (event) => {
+    camera.aspect = innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+    
+    // Update shader uniforms with new resolution
+    updateShaderUniforms();
+});
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.enablePan = false;
