@@ -9,6 +9,11 @@
 
 </div>
 
+using:
+
+- three
+- gsap
+
 ## Installation
 ```
 npm install
